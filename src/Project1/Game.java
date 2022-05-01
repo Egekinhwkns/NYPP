@@ -87,7 +87,7 @@ public class Game {
 				isaret1="-";
 			}
 			else if(int_random==2) {
-				isaret1="*";
+				isaret1="*" ;
 			}
 			else {
 				isaret1="/";
