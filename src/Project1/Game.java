@@ -18,11 +18,11 @@ public class Game {
 		Random rand = new Random();
 		int upperbound = 2;
 		int int_random = rand.nextInt(upperbound);  
-		
+		int intSonuc;
 		// eğer tek işaret ise:
 		if(int_random==0) {
 			String sayi1,isaret1,sayi2,esittir,sonuc;
-			int intSonuc,intSayi1,intSayi2;
+			int intSayi1,intSayi2;
 			
 			//iki veya üc basamaklı olasılığını eşitledim.
 			int_random=rand.nextInt(upperbound);
@@ -33,9 +33,7 @@ public class Game {
 			intSayi1 = rand.nextInt(upperbound);
 			sayi1 = Integer.toString(intSayi1);
 			//sayi2 için random değer:
-			int_random=rand.nextInt(upperbound);
-			if(int_random==0) upperbound = 99;
-			else upperbound = 999;
+			upperbound=99; //ikinci sayı daha küçük olursa daha anlaşılır bir denklem oluyor.
 			intSayi2 = rand.nextInt(upperbound);
 			sayi2 = Integer.toString(intSayi2);
 			//isaret:
@@ -72,24 +70,17 @@ public class Game {
 		else {
 			
 			String sayi1,isaret1,sayi2,isaret2,sayi3,esittir,sonuc;
-			int intSayi1,intSayi2,intSayi3,intSonuc;
-			
-			int_random=rand.nextInt(upperbound);
-			if(int_random==0) upperbound = 99;
-			else upperbound = 999;
-			//sayi1 için random değer:
+			int intSayi1,intSayi2,intSayi3;
+
+			upperbound=99;
 			intSayi1 = rand.nextInt(upperbound);
 			sayi1 = Integer.toString(intSayi1);
 			//sayi2 için random değer:
-			int_random=rand.nextInt(upperbound);
-			if(int_random==0) upperbound = 99;
-			else upperbound = 999;
+			upperbound=10;
 			intSayi2 = rand.nextInt(upperbound);
 			sayi2 = Integer.toString(intSayi2);
 			//sayi3 için random değer:
-			int_random=rand.nextInt(upperbound);
-			if(int_random==0) upperbound = 99;
-			else upperbound = 999;
+			upperbound=10;
 			intSayi3 = rand.nextInt(upperbound);
 			sayi3=Integer.toString(intSayi3);
 			//isaret1:
@@ -128,7 +119,7 @@ public class Game {
 			equation = sayi1 + isaret1 + sayi2 + isaret2 + sayi3 + esittir + sonuc;
 			//System.out.println(equation);
 		}
-		if(equation.length()<7 || equation.length()>9) {
+		if(equation.length()<7 || equation.length()>9 || intSonuc<0) {
 			generateEquation();
 		}
 		return equation;
