@@ -13,7 +13,7 @@ public class Game {
 	}
 	
 	public String generateEquation() {
-		
+		//deneme
 		// 1 işaret veya 2 işaret seçimi için random değer olusturuyorum.
 		Random rand = new Random();
 		int upperbound = 2;
