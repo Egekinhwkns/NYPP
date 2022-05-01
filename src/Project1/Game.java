@@ -24,11 +24,18 @@ public class Game {
 			String sayi1,isaret1,sayi2,esittir,sonuc;
 			int intSonuc,intSayi1,intSayi2;
 			
-			upperbound = 999;
+			//iki veya üc basamaklı olasılığını eşitledim.
+			int_random=rand.nextInt(upperbound);
+			if(int_random==0) upperbound = 99;
+			else upperbound = 999;
 			//sayi1 için random değer:
+			
 			intSayi1 = rand.nextInt(upperbound);
 			sayi1 = Integer.toString(intSayi1);
 			//sayi2 için random değer:
+			int_random=rand.nextInt(upperbound);
+			if(int_random==0) upperbound = 99;
+			else upperbound = 999;
 			intSayi2 = rand.nextInt(upperbound);
 			sayi2 = Integer.toString(intSayi2);
 			//isaret:
@@ -58,7 +65,7 @@ public class Game {
 			
 			//olusan denklem:
 			equation = sayi1+isaret1+sayi2+esittir+sonuc;
-			System.out.println(equation);
+			//System.out.println(equation);
 			
 		}
 		//çift işaret ise:
@@ -67,14 +74,22 @@ public class Game {
 			String sayi1,isaret1,sayi2,isaret2,sayi3,esittir,sonuc;
 			int intSayi1,intSayi2,intSayi3,intSonuc;
 			
-			upperbound = 999;
+			int_random=rand.nextInt(upperbound);
+			if(int_random==0) upperbound = 99;
+			else upperbound = 999;
 			//sayi1 için random değer:
 			intSayi1 = rand.nextInt(upperbound);
 			sayi1 = Integer.toString(intSayi1);
 			//sayi2 için random değer:
+			int_random=rand.nextInt(upperbound);
+			if(int_random==0) upperbound = 99;
+			else upperbound = 999;
 			intSayi2 = rand.nextInt(upperbound);
 			sayi2 = Integer.toString(intSayi2);
 			//sayi3 için random değer:
+			int_random=rand.nextInt(upperbound);
+			if(int_random==0) upperbound = 99;
+			else upperbound = 999;
 			intSayi3 = rand.nextInt(upperbound);
 			sayi3=Integer.toString(intSayi3);
 			//isaret1:
@@ -108,45 +123,80 @@ public class Game {
 			}
 			//esittir:
 			esittir="=";
-			
-			//işlem sırası kontrolü:
-			if(isaret1=="*" || isaret1=="/") {
-				if(isaret1=="*") {
-					intSonuc = intSayi1*intSayi2;
-				}
-				else{
-					intSonuc=intSayi1/intSayi2;
-				}
-				//isaret2'nin işlemi:
-				if(isaret2=="+") {
-					intSonuc+=intSayi3;
-				}
-				else if(isaret2=="-") {
-					intSonuc-=intSayi3;
-				}
-				else if(isaret2=="*") {
-					intSonuc*=intSayi3;
-				}
-				else {
-					intSonuc/=intSayi3;
-				}
-			}
-			else {
-				if(isaret2=="*" || isaret2=="/") {
-					if(isaret2=="*") {
-						intSonuc=intSayi2*intSayi3;
-					}
-					else {
-						intSonuc=intSayi2/intSayi3;
-					}
-				}
-			}
+			intSonuc = twoSignsCalculate(intSayi1, isaret1, intSayi2, isaret2, intSayi3);
+			sonuc = Integer.toString(intSonuc);
+			equation = sayi1 + isaret1 + sayi2 + isaret2 + sayi3 + esittir + sonuc;
+			//System.out.println(equation);
 		}
-		return null;
+		if(equation.length()<7 || equation.length()>9) {
+			generateEquation();
+		}
+		return equation;
 	}
 
 	public void printx() {
 		System.out.println(equation.charAt(0)); //Stringde belirtilen yerdeki karakteri seçiyor
+	}
+	
+	private int twoSignsCalculate(int sayi1,String i1,int sayi2,String i2,int sayi3) {
+		int sonuc;
+		if(i1=="+") {
+			if(i2=="+") {
+				sonuc = sayi1 + sayi2 + sayi3;
+			}
+			else if(i2=="-") {
+				sonuc = sayi1 + sayi2 - sayi3;
+			}
+			else if(i2=="*") {
+				sonuc = sayi1 + sayi2 * sayi3;
+			}
+			else {
+				sonuc = sayi1 + sayi2 / sayi3;
+			}
+		}
+		else if(i1=="-") {
+			if(i2=="+") {
+				sonuc = sayi1 - sayi2 + sayi3;
+			}
+			else if(i2=="-") {
+				sonuc = sayi1 - sayi2 - sayi3;
+			}
+			else if(i2=="*") {
+				sonuc = sayi1 - sayi2 * sayi3;
+			}
+			else {
+				sonuc = sayi1 - sayi2 / sayi3;
+			}
+		}
+		else if(i1=="*") {
+			if(i2=="+") {
+				sonuc = sayi1 * sayi2 + sayi3;
+			}
+			else if(i2=="-") {
+				sonuc = sayi1 * sayi2 - sayi3;
+			}
+			else if(i2=="*") {
+				sonuc = sayi1 * sayi2 * sayi3;
+			}
+			else {
+				sonuc = sayi1 * sayi2 / sayi3;
+			}
+		}
+		else {
+			if(i2=="+") {
+				sonuc = sayi1 / sayi2 + sayi3;
+			}
+			else if(i2=="-") {
+				sonuc = sayi1 / sayi2 - sayi3;
+			}
+			else if(i2=="*") {
+				sonuc = sayi1 / sayi2 * sayi3;
+			}
+			else {
+				sonuc = sayi1 / sayi2 / sayi3;
+			}
+		}
+		return sonuc;
 	}
 	
 	public void start() {
